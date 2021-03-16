@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="d-flex justify-content-center mt-5">
+      <div v-if="posts.loading" class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import usePosts from '../hooks/usePosts';
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  setup() {
+    const posts = usePosts('all');
+    
+    return {
+      posts
+    }
+  
   }
 }
 </script>
+
+<style lang="scss">
+
+</style>
