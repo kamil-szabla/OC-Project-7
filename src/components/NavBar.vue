@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div>
       <router-link to="/">
-        <img src="./assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="50" class="navbar-brand align-top">
+        <img src="../assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="50" class="navbar-brand align-top" id="navbar-logo">
       </router-link>
     </div>
     <form class="d-flex ">
@@ -16,24 +16,18 @@
     </div>
   </div>
 </nav>
-<router-view class="container"/>
 </template>
 
 <script>
-// import API from './lib/API'
 
-
-// async function getPosts() {
-
-//   const data = await API.getPosts('all');
-//   console.log(data)
-// }
-// getPosts();
-
+export default {
+  name: 'NavBar'
+}
 
 </script>
 
-<style>
+<style lang="scss">
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -43,16 +37,7 @@
   /* margin: 50px 5%; */
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#navbar-logo {
+  width: 150px;
 }
 </style>

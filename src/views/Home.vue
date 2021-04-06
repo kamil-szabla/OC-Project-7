@@ -1,28 +1,31 @@
 <template>
   <div class="home">
-    <div class="d-flex justify-content-center mt-5">
-      <div v-if="posts.loading" class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
+    <Post 
+    v-for="post in posts" 
+    :key='post._id' 
+    :post='post' />
   </div>
 </template>
 
 <script>
-import usePosts from '../hooks/usePosts';
+import { ref } from 'vue';
+import Post from '../components/Post';
+import vposts from '../vposts';
 
 export default {
   setup() {
-    const posts = usePosts('all');
-    
+    const posts = ref(vposts);
+
     return {
-      posts
+      posts,
+      Post
     }
-  
   }
 }
 </script>
 
 <style lang="scss">
-
+.home {
+  min-height: 100vh;
+}
 </style>

@@ -25,5 +25,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.wrapper {
+  min-height: 100vh;
+}
 </style>

@@ -1,36 +1,20 @@
 <template>
-<nav class="navbar navbar-light bg-light fixed navbar-expand-lg">
-  <div class="container-fluid">
-    <div>
-      <router-link to="/">
-        <img src="./assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="50" class="navbar-brand align-top">
-      </router-link>
-    </div>
-    <form class="d-flex ">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-secondary" type="submit">Search</button>
-    </form>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <router-link to="/login" class="btn btn-outline-primary" role="button">Log In</router-link>
-      <router-link to="/signup" class="btn btn-primary" role="button">Sign Up</router-link>
-    </div>
+  <NavBar />
+  <div class="container">
+    <h2 class="text-center d-flex justify-content-center m-3">{{ $route.name }}</h2>
+    <router-view class="" v-model="name" />
   </div>
-</nav>
-<router-view class="container"/>
+  <Footer />
 </template>
 
-<script setup>
-import API from './lib/API'
+<script>
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
-
-async function getPosts() {
-
-  const data = await API.getPosts('aww');
-  console.log(data)
+export default {
+  name: 'App',
+  components: { NavBar, Footer }, 
 }
-getPosts();
-
-
 </script>
 
 <style>
@@ -38,21 +22,8 @@ getPosts();
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-  /* margin: 50px 5%; */
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+
 </style>
