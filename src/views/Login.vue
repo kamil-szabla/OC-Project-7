@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="wrapper fadeInDown d-flex justify-content-center">
+  <div class="wrapper d-flex justify-content-center ">
     <div id="formContent">
       <div class="fadeIn first">
         <img src="../assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="60" class="navbar-brand align-top">

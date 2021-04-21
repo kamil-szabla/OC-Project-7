@@ -1,8 +1,13 @@
 <template>
   <article class="post p-2 mb-5 border">
-    <router-link to="#" class="d-flex p-2">
+    <router-link 
+    :to="{ name: 'SinglePost', params: { id: post._id }}"
+    class="d-flex p-2">
       <figure class="figure text-center m-3">
-        <img :src="post.author.profile_img_url" alt="Image" class="figure-img img-fluid rounded-circle" id="profile-image">
+        <img :src="post.author.profile_img_url" 
+        class="figure-img img-fluid rounded-circle" 
+        alt="Image" 
+        id="profile-image">
         <div class="post-author">
           <h5 class="font-weight-bold">
             {{ post.author.display_name }} 
@@ -13,21 +18,21 @@
         </div>
       </figure>
 
-      <section class="post-body m-4 w-100">
-        
-
+      <div class="">
         <div :class="(post.image ? 'mb-3' : '')">
           <p class="text-muted" v-html="post.body"> </p>
         </div>
 
-        <figure v-if="post.image" class="rounded border-gray overflow-hidden justify-content-center d-flex">
+        <figure 
+        v-if="post.image" 
+        class="rounded border-gray overflow-hidden justify-content-center d-flex">
           <img 
           :src="post.image.url" 
           :alt="post.image.alt"
-          class="">
+          class="w-50 mx-auto rounded d-block img-thumbnail">
         </figure>
 
-      </section>
+      </div>
     </router-link>
   </article>
 
@@ -49,9 +54,9 @@ a {
     text-decoration: none;
   }
 }
-img {
-  width: 120px;
-}
+// img {
+//   width: 120px;
+// }
 #profile-image {
   width: 5em;
 }
