@@ -5,9 +5,9 @@
       <div class="fadeIn first">
         <img src="../assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="60" class="navbar-brand align-top">
       </div>
-      <form>
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
-        <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password">
+      <form @submit.prevent="logIn">
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" v-model="username">
+        <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" v-model="password">
         <input type="submit" class="fadeIn fourth btn btn-primary" value="Log In">
       </form>
     </div>
@@ -16,10 +16,51 @@
 </template>
 
 <script>
+import axios from 'axios';
+import router from '@/router';
+
 export default {
-    setup() {
-        
-    },
+  setup() {
+    let username, password = '';
+    let loggedIn = false;
+
+    async function logIn() {
+      await axios.post('http://localhost:3000/api/login',
+        {
+        username: this.username,
+        password: this.password
+        },
+        { headers:
+          {
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then((response) => {
+        if(response.data.status === 200) {
+          this.loggedIn = true;
+          console.log(response.data)
+
+          window.localStorage.setItem('sessionToken', response.data.token);
+
+          console.log(response.data.token)
+          router.push('/')
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+    // watch(() => {
+    //   if(loggedIn) {
+    //     this.$router.push('/')
+    //   }
+    // })
+    return {
+      username,
+      password,
+      loggedIn,
+      logIn
+    }
+  }
 }
 </script>
 
@@ -89,7 +130,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -110,12 +151,12 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
   background-color: #fff;
   border-bottom: 2px solid #0d6efd;
 }
 
-input[type=text]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
 

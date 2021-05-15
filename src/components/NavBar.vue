@@ -11,8 +11,8 @@
       <button class="btn btn-outline-secondary" type="submit">Search</button>
     </form> -->
     <div class="d-grid gap-2 d-flex justify-content-md-end">
-      <router-link to="/login" class="btn btn-outline-primary" role="button">Log In</router-link>
-      <router-link to="/signup" class="btn btn-primary" role="button">Sign Up</router-link>
+      <router-link to="/login" class="btn btn-outline-primary" role="button" v-if="!isLoggedIn">Log In</router-link>
+      <router-link to="/signup" class="btn btn-primary" role="button" v-if="!isLoggedIn">Sign Up</router-link>
     </div>
   </div>
 </nav>

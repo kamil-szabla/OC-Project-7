@@ -16,6 +16,8 @@ export default {
   setup() {
     const posts = ref(vposts);
 
+   
+
     return {
       posts,
       Post
