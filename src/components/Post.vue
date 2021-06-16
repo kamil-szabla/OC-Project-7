@@ -1,38 +1,27 @@
 <template>
   <article class="post p-2 mb-5 border">
+    
     <router-link 
-    :to="{ name: 'SinglePost', params: { id: post._id }}"
-    class="d-flex p-2">
-      <figure class="figure text-center m-3">
-        <img :src="post.author.profile_img_url" 
-        class="figure-img img-fluid rounded-circle" 
-        alt="Image" 
-        id="profile-image">
-        <div class="post-author">
-          <h5 class="font-weight-bold">
-            {{ post.author.display_name }} 
-          </h5>
-          <h6 class="text-muted">
-            {{ post.author.username }}
-          </h6>
-        </div>
-      </figure>
+    :to="{ name: 'SinglePost', params: { id: (post.id)   }}"
+    :post='post'>
 
-      <div class="">
-        <div :class="(post.image ? 'mb-3' : '')">
-          <p class="text-muted" v-html="post.body"> </p>
-        </div>
+    <div class="singlePost">
+      <div :class="(post.media ? 'mb-3' : '')">
+        <h4 class="text-uppercase text-center">{{post.title}} <span class="badge bg-primary" v-if="!seenPosts.includes(post.id)">New</span>
 
-        <figure 
-        v-if="post.image" 
-        class="rounded border-gray overflow-hidden justify-content-center d-flex">
-          <img 
-          :src="post.image.url" 
-          :alt="post.image.alt"
-          class="w-50 mx-auto rounded d-block img-thumbnail">
-        </figure>
-
+        </h4>
       </div>
+        <img 
+        :src="post.media"
+        alt="post.image.alt"
+        class="mx-auto rounded d-block mb-4">
+    </div>
+
+    <div class="d-inline-block w-100">
+      <div class="footer text-muted text-end">
+        Added {{ date(post.created_at) }} by {{ post.createdBy }}
+      </div>
+    </div>
     </router-link>
   </article>
 
@@ -40,8 +29,19 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
-  props: ['post']
+  props: ['post', 'seenPosts'],
+  
+  setup() {
+    function date(d) {
+    return moment(d).fromNow()
+  }
+
+    return {
+      date
+    }
+  }
 }
 </script>
 
@@ -54,10 +54,9 @@ a {
     text-decoration: none;
   }
 }
-// img {
-//   width: 120px;
-// }
-#profile-image {
-  width: 5em;
+
+img {
+  max-height: 70vh;
+  max-width: 100%;
 }
 </style>

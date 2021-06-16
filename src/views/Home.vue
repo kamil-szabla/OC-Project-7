@@ -1,28 +1,74 @@
 <template>
   <div class="home">
-    <Post 
-    v-for="post in posts" 
-    :key='post._id' 
-    :post='post' />
+    
+    <h2 v-if="!user" class="text-center">You are not logged in!</h2>
+    
+    <div v-if="user">
+      <Post 
+      v-for="post in postData" 
+      :key='post.id + 1'
+      :post='post'
+      :postData='postData'
+      :user='user'
+      :seenPosts='seenPosts'/>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+
+import { mapGetters } from 'vuex'
 import Post from '../components/Post';
-import vposts from '../vposts';
+import axios from 'axios'
+
 
 export default {
-  setup() {
-    const posts = ref(vposts);
+  computed: {
+    ...mapGetters(['user'])
+  },
+  data() {
+    return {
+      postData: null,
+      seenPosts: []
+    }
+  },
+  methods: {
+    // get all seen posts
+    async getSeenPosts() {
+      axios.post('http://localhost:3000/api/post/visited', {
+        'userId': localStorage.userId
+      }).then((res) => {
+        console.log(res.data);
+        this.seenPosts= res.data.map(a => a.postId)
+        console.log(this.seenPosts);
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+  },
 
-   
+  async created() {
+    // get all posts
+    const response = await axios.get('http://localhost:3000/api/post/getPosts', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+    this.postData = response.data.slice().reverse();
+
+    console.log(this.postData);
+  },
+   setup() {
+
 
     return {
-      posts,
-      Post
+
+      Post,
     }
-  }
+  },
+  beforeMount() {
+    this.getSeenPosts()
+  },
 }
 </script>
 

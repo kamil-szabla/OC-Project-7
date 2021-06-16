@@ -18,11 +18,12 @@
 <script>
 import axios from 'axios';
 import router from '@/router';
+import store from '@/store'
+
 
 export default {
   setup() {
     let username, password = '';
-    let loggedIn = false;
 
     async function logIn() {
       await axios.post('http://localhost:3000/api/login',
@@ -37,27 +38,25 @@ export default {
         }
       ).then((response) => {
         if(response.data.status === 200) {
-          this.loggedIn = true;
-          console.log(response.data)
 
-          window.localStorage.setItem('sessionToken', response.data.token);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data.userId.id);
+          localStorage.setItem('username', response.data.userId.username);
 
-          console.log(response.data.token)
+          store.dispatch('user', response.data)
           router.push('/')
+        } else if(response.data.status !== 200) {
+          alert(response.data.message)
         }
       }).catch((error) => {
+        alert(error)
         console.log(error)
       })
     }
-    // watch(() => {
-    //   if(loggedIn) {
-    //     this.$router.push('/')
-    //   }
-    // })
+  
     return {
       username,
       password,
-      loggedIn,
       logIn
     }
   }
@@ -100,7 +99,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   background-color: #0d6efd;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 15px 60px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

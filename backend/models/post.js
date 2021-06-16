@@ -7,17 +7,27 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     text: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT,
     },
     media: {
       type: DataTypes.STRING(1200),
     },
     createdBy: {
-      type: DataTypes.INTEGER
-    }
+      type: DataTypes.STRING,
+    },
+    created_at: {
+      type: "TIMESTAMP",
+      // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
+    },
   });
+
+  Post.associate = models = {
+
+  }
+
   return Post;
 }

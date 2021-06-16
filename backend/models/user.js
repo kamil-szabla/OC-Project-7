@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     image: {
       type: DataTypes.STRING,
@@ -28,10 +28,19 @@ module.exports = (sequelize, DataTypes) => {
       required: true,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      default: new Date(),
+    created_at: {
+      type: "TIMESTAMP",
+      // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
     },
   });
+
+  User.associate = models => {
+    User.hasMany(models.Post, {
+      onDelete: 'cascade',
+    }); 
+  }
+
+
   return User;
 };

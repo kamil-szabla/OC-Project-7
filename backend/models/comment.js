@@ -10,10 +10,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     createdBy: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     postId: {
       type: DataTypes.INTEGER,
+    },
+    created_at: {
+      type: "TIMESTAMP",
+      // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
     },
   });
   return Comment;

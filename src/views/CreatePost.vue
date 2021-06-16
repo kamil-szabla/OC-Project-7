@@ -1,21 +1,21 @@
 <template>
-<form class="main" @submit.prevent="addPost">
+<form class="main" @submit.prevent="addPost" enctype='multipart/form-data'>
   <div class="row mt-5">
-    <div class="col">
+    <div class="col-md-6">
       <div class="row d-inline">
         <label for="title"><h2>Title:</h2></label>
-        <input  type="post-title" name="title" class="float-right" v-model="title">
+        <input  type="post-title" name="title" class="float-right w-100" v-model="title">
       </div>
       <div class="row d-inline">
         <label for="post-text"><h2>Post text:</h2></label>
-        <textarea  type="post-text" name="post-text" row='8' v-model="text"></textarea>
+        <textarea class="float-right w-100" type="post-text" name="post-text" row='8' v-model="text"></textarea>
       </div>
     </div>
-    <div class="col">
+    <div class="col-md-6">
       <div class="uploadfilecontainer">
         <label for="file"><h2>Upload your image/gif</h2></label>
         <br>
-        <input accept="image/gif, image/jpeg, image/png" type="file" name="file" @change="onFileChange">
+        <input accept="image/gif, image/jpeg, image/png, webp" type="file" name="file" @change="onFileChange">
         <div id='image-box'>
           <img id="preview" />
         </div>
@@ -28,7 +28,7 @@
 
 <script>
 import axios from 'axios';
-// import router from '@/router';
+import router from '@/router';
 
 export default {
 setup() {
@@ -48,19 +48,28 @@ setup() {
       }
   }
 
-  function addPost() {
-    axios.post('http://localhost:3000/api/post/addPost', {
-      title: this.title, text: this.text, media: this.file.name,
-    }, {
+  async function addPost() {
+    const username = localStorage.getItem('username');
+    let formData = new FormData();
+    formData.append('media', this.file);
+    formData.append('title', this.title);
+    formData.append('text', this.text);
+    formData.append('createdBy', username);
+    await axios.post('http://localhost:3000/api/post/addPost', formData,
+    {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'multipart/form-data'
       }
     }).then((response) => {
       console.log(response)
       console.log(this.file)
-      // router.push('/')
+      if(response) {
+        router.push('/')
+      }
     }).catch((error) => {
-      console.log(error)
+      console.log(error);
+      alert('ooops... Something went wrong, try again' + error)
     })
   }
 

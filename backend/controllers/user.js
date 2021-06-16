@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+// const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 let db = require("../dbConfig");
 // let jwtConfig = require("../config");
@@ -103,19 +103,62 @@ exports.getUserDetails = (req, res, next) => {
   });
 };
 
-exports.addPost = (req, res, next) => {
-  let sql = 'INSERT INTO Posts (Title) VALUES ("' + req.body.title + '")';
-  db.query(sql, function(err, result, fields) {
-    if (err) {
+// exports.addPost = (req, res, next) => {
+//   let sql = 'INSERT INTO Posts (Title) VALUES ("' + req.body.title + '")';
+//   db.query(sql, function(err, result, fields) {
+//     if (err) {
+//       return res.json({
+//         status: err.status,
+//         message: err.sqlMessage,
+//         data: err,
+//       });
+//     } else
+//       res.status(201).json({
+//         status: "201",
+//         message: "Post saved successfully!",
+//       });
+//   });
+// };
+
+exports.deleteProfile = (req, res, next) => {
+  let sqlSelect =
+    'SELECT * FROM Posts WHERE id = "' + req.params.id + '";';
+  db.query(sqlSelect, function(err, result, fields) {
+    if (err)
       return res.json({
         status: err.status,
         message: err.sqlMessage,
         data: err,
       });
-    } else
-      res.status(201).json({
-        status: "201",
-        message: "Post saved successfully!",
+  });
+  let sql = 'DELETE FROM Users WHERE id = "' + req.params.id + '";';
+  db.query(sql, function(err, result, fields) {
+    if (err)
+      return res.json({
+        status: err.status,
+        message: err.sqlMessage,
+        data: err,
       });
+    res.json({
+      status: "200",
+      message: "Profile Deleted",
+      data: null,
+    });
   });
 };
+
+const Post = db.post;
+const User = db.user;
+
+exports.create = (user) => {
+  return User.create({
+    name: user.name,
+  })
+  .then((user) => {
+    console.log('Created tag: ' + JSON.stringify(user, null, 2));
+    return user
+  })
+  .catch((err) => {
+    console.log('Error: ' + err)
+  })
+}
