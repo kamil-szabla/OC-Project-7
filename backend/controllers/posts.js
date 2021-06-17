@@ -30,7 +30,7 @@ exports.addPost = (req, res, next) => {
 
 exports.getAllPosts = (req, res, next) => {
   let sql =
-    "SELECT Posts.id, Posts.title, Posts.text, Posts.media, Posts.createdBy, Posts.createdAt FROM Posts INNER JOIN Users ON Posts.CreatedBy=Users.username;";
+    "SELECT Posts.id, Posts.title, Posts.text, Posts.media, Posts.createdBy, Posts.createdAt FROM Posts ";
   db.query(sql, function(err, result, fields) {
     if (err)
       return res.json({

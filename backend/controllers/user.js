@@ -140,23 +140,6 @@ exports.getUserDetails = (req, res, next) => {
   });
 };
 
-// exports.addPost = (req, res, next) => {
-//   let sql = 'INSERT INTO Posts (Title) VALUES ("' + req.body.title + '")';
-//   db.query(sql, function(err, result, fields) {
-//     if (err) {
-//       return res.json({
-//         status: err.status,
-//         message: err.sqlMessage,
-//         data: err,
-//       });
-//     } else
-//       res.status(201).json({
-//         status: "201",
-//         message: "Post saved successfully!",
-//       });
-//   });
-// };
-
 exports.deleteProfile = (req, res, next) => {
   let sqlSelect =
     'SELECT * FROM Posts WHERE id = "' + req.params.id + '";';
@@ -184,18 +167,18 @@ exports.deleteProfile = (req, res, next) => {
   });
 };
 
-const Post = db.post;
-const User = db.user;
+// const Post = db.post;
+// const User = db.user;
 
-exports.create = (user) => {
-  return User.create({
-    name: user.name,
-  })
-  .then((user) => {
-    console.log('Created tag: ' + JSON.stringify(user, null, 2));
-    return user
-  })
-  .catch((err) => {
-    console.log('Error: ' + err)
-  })
-}
+// exports.create = (user) => {
+//   return User.create({
+//     name: user.name,
+//   })
+//   .then((user) => {
+//     console.log('Created tag: ' + JSON.stringify(user, null, 2));
+//     return user
+//   })
+//   .catch((err) => {
+//     console.log('Error: ' + err)
+//   })
+// }

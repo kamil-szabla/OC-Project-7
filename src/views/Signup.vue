@@ -6,7 +6,7 @@
         <img src="../assets/icon-left-font-monochrome-black.svg" alt="Logo Grupomania" width="200" height="60" class="navbar-brand align-top">
       </div>
       <form @submit.prevent='createAccount'>
-        <input type="text" id="email" class="fadeIn second" name="login" placeholder="Email" v-model="email">
+        <input type="email" id="email" class="fadeIn second" name="login" placeholder="Email" v-model="email">
         <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" v-model="username">
         <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" v-model="password">
         <input type="password" id="password" class="fadeIn third" name="login" placeholder="Repeat password" v-model="confirmpassword">
