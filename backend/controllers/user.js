@@ -5,6 +5,43 @@ let db = require("../dbConfig");
 // let jwtConfig = require("../config");
 // let jwtString = jwtConfig.jwtString;
 
+// exports.signup = (req, res, next) => {
+//   bcrypt.hash(req.body.password, 12).then((hash) => {
+//     let sql =
+//       'INSERT INTO Users (Username, Email, Password) VALUES ("' +
+//       req.body.username +
+//       '", "' +
+//       req.body.email +
+//       '", "' +
+//       hash +
+//       '")';
+//     db.query(sql, function(err, result, fields) {
+//       if (err) {
+//         if (err.sqlMessage.includes("Password"))
+//           return res.status(500).json({
+//             message: "Username already used!",
+//             data: err,
+//           });
+//         if (err.sqlMessage.includes("Email"))
+//           return res.status(500).json({
+//             message: "Email already used!",
+//             data: err,
+//           });
+//         else
+//           return res.json({
+//             status: err.status,
+//             message: err.sqlMessage,
+//             data: err,
+//           });
+//       } else 
+//       res.status(200).json({
+//         message: "User saved successfully!",
+//         data: null,
+//       });
+//     });
+//   });
+// };
+
 exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, 12).then((hash) => {
     let sql =
@@ -17,27 +54,27 @@ exports.signup = (req, res, next) => {
       '")';
     db.query(sql, function(err, result, fields) {
       if (err) {
-        // if (err.sqlMessage.includes("Password"))
-        //   return res.status(500).json({
-        //     message: "Username already used!",
-        //     data: err,
-        //   });
-        // if (err.sqlMessage.includes("Email"))
-        //   return res.status(500).json({
-        //     message: "Email already used!",
-        //     data: err,
-        //   });
-        // else
-          return res.json({
-            status: err.status,
-            message: err.sqlMessage,
+        if (err.sqlMessage.includes("user.username"))
+          return res.status(200).json({
+            message: "Username already used!",
             data: err,
           });
-      } else 
-      res.status(200).json({
-        message: "User saved successfully!",
-        data: null,
-      });
+        if (err.sqlMessage.includes("users.email"))
+          return res.status(200).json({
+            message: "Email already used!",
+            data: err,
+          });
+        else
+          return res.json({
+            status: 401,
+            message: "Error occured, please try again!!!",
+            data: err,
+          });
+      } else
+        res.status(200).json({
+          message: "User saved successfully!",
+          data: null,
+        });
     });
   });
 };

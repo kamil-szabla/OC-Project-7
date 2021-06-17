@@ -12,7 +12,7 @@
                     <div class="user d-flex flex-row align-items-center"> 
                       <p class="font-weight-bolder">{{ comment.text }} </p> 
                     </div> 
-                    <small>{{date(comment.created_at)}} </small>
+                    <small>{{date(comment.createdAt)}} </small>
                 </div>
             </div>
 

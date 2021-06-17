@@ -36,6 +36,7 @@ db.Sequelize = Sequelize;
 
 db.post = require('./post')(sequelize, Sequelize);
 db.user = require('./user')(sequelize, Sequelize);
+db.comments = require('./comment')(sequelize, Sequelize);
 
 db.user.belongsToMany(db.post, {
   through: 'seen',

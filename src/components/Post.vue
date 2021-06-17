@@ -19,7 +19,7 @@
 
     <div class="d-inline-block w-100">
       <div class="footer text-muted text-end">
-        Added {{ date(post.created_at) }} by {{ post.createdBy }}
+        Added {{ date(post.createdAt) }} by {{ post.createdBy }}
       </div>
     </div>
     </router-link>

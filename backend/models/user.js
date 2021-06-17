@@ -23,23 +23,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "https://picsum.photos/id/1025/200/300",
     },
-    postId: {
-      type: DataTypes.INTEGER,
-      required: true,
+    createdAt: {
+      type: "TIMESTAMP",
+      defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
       allowNull: false,
     },
-    created_at: {
+    updatedAt: {
       type: "TIMESTAMP",
-      // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
-      allowNull: false,
+      defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      allowNull: true,
     },
   });
 
-  User.associate = models => {
-    User.hasMany(models.Post, {
-      onDelete: 'cascade',
-    }); 
-  }
+  // User.associate = models => {
+  //   User.hasMany(models.Post, {
+  //     onDelete: 'cascade',
+  //   }); 
+  // }
 
 
   return User;

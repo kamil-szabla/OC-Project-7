@@ -18,16 +18,21 @@ module.exports = (sequelize, DataTypes) => {
     createdBy: {
       type: DataTypes.STRING,
     },
-    created_at: {
+    createdAt: {
       type: "TIMESTAMP",
-      // defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
       allowNull: false,
+    },
+    updatedAt: {
+      type: "TIMESTAMP",
+      defaultValue: DataTypes.literal("CURRENT_TIMESTAMP"),
+      allowNull: true,
     },
   });
 
-  Post.associate = models = {
+  // Post.associate = models = {
 
-  }
+  // }
 
   return Post;
 }

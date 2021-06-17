@@ -13,7 +13,7 @@
               <h4>Login: {{userInfo.username}}</h4>
               <p>Email: {{userInfo.email}}
               <br />
-              Account created at: {{ date(userInfo.created_at) }}</p>
+              Account created at: {{ date(userInfo.createdAt) }}</p>
             <button type="button" class="btn btn-danger" @click.prevent="deleteAccount">Delete Account</button>
             </div>
           </div>

@@ -15,7 +15,7 @@
 
         <div class="d-inline-block w-100">
       <div class="footer text-muted text-end">
-        Added {{ date(post[0].created_at) }} by {{ post[0].createdBy }}
+        Added {{ date(post[0].createdAt) }} by {{ post[0].createdBy }}
       </div>
     </div>
 
