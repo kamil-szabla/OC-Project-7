@@ -1,46 +1,7 @@
 const bcrypt = require("bcrypt");
-// const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 let db = require("../dbConfig");
-// let jwtConfig = require("../config");
-// let jwtString = jwtConfig.jwtString;
 
-// exports.signup = (req, res, next) => {
-//   bcrypt.hash(req.body.password, 12).then((hash) => {
-//     let sql =
-//       'INSERT INTO Users (Username, Email, Password) VALUES ("' +
-//       req.body.username +
-//       '", "' +
-//       req.body.email +
-//       '", "' +
-//       hash +
-//       '")';
-//     db.query(sql, function(err, result, fields) {
-//       if (err) {
-//         if (err.sqlMessage.includes("Password"))
-//           return res.status(500).json({
-//             message: "Username already used!",
-//             data: err,
-//           });
-//         if (err.sqlMessage.includes("Email"))
-//           return res.status(500).json({
-//             message: "Email already used!",
-//             data: err,
-//           });
-//         else
-//           return res.json({
-//             status: err.status,
-//             message: err.sqlMessage,
-//             data: err,
-//           });
-//       } else 
-//       res.status(200).json({
-//         message: "User saved successfully!",
-//         data: null,
-//       });
-//     });
-//   });
-// };
 
 exports.signup = (req, res, next) => {
   bcrypt.hash(req.body.password, 12).then((hash) => {
@@ -166,19 +127,3 @@ exports.deleteProfile = (req, res, next) => {
     });
   });
 };
-
-// const Post = db.post;
-// const User = db.user;
-
-// exports.create = (user) => {
-//   return User.create({
-//     name: user.name,
-//   })
-//   .then((user) => {
-//     console.log('Created tag: ' + JSON.stringify(user, null, 2));
-//     return user
-//   })
-//   .catch((err) => {
-//     console.log('Error: ' + err)
-//   })
-// }

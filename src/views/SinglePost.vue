@@ -122,9 +122,6 @@ export default {
   min-height: 100vh;
 }
 
-/* #singlePost{
-  max-height: 80vh;
-} */
 img {
   max-height: 70vh;
   max-width: 100%;

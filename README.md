@@ -1,24 +1,21 @@
 # oc-project-7
 
+
+
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Build Vue 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Connect to server and database
 ```
-npm run build
+change directory to 'backend'
+
+run command - nodemon server.js
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

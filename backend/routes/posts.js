@@ -3,20 +3,8 @@ const router = express.Router();
 const auth = require('../middleware/auth')
 const multer = require('../middleware/multer-config')
 let pool = require("../dbConfig");
-
 const postCtrl = require("../controllers/posts");
-const db = require("../models");
 
-router.post("/visited",  (req, res, next) => {
-  let userID = req.body.userId
-  let sql = "SELECT DISTINCT postId FROM seen WHERE userId = " + userID;
-  pool.query(sql, function(err, result, fields) {
-    if(err) {
-      return res.json(err);
-    }
-    res.json(result)
-  })
-});
 router.post("/addPost", auth, multer, postCtrl.addPost);
 router.get("/getPosts", postCtrl.getAllPosts);
 router.get("/singlePost/:id", postCtrl.getSinglePost);
@@ -41,7 +29,16 @@ router.post('/seen', async (req, res) => {
   })
 });
 
-
 // show visited posts
+router.post("/visited", (req, res, next) => {
+  let userID = req.body.userId;
+  let sql = "SELECT DISTINCT postId FROM seen WHERE userId = " + userID;
+  pool.query(sql, function(err, result, fields) {
+    if (err) {
+      return res.json(err);
+    }
+    res.json(result);
+  });
+});
 
 module.exports = router;

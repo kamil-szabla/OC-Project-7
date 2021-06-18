@@ -159,7 +159,7 @@ input[type=text]:placeholder, input[type=password]:placeholder, input[type=email
   color: #cccccc;
 }
 
-/* Simple CSS3 Fade-in Animation */
+/*Fade-in Animation */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }

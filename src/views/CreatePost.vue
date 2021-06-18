@@ -15,7 +15,7 @@
       <div class="uploadfilecontainer">
         <label for="file"><h2>Upload your image/gif</h2></label>
         <br>
-        <input accept="image/gif, image/jpeg, image/png, webp" type="file" name="file" @change="onFileChange">
+        <input accept="image/gif, image/jpeg, image/png, webp" type="file" name="file" @change="onFileChange" required>
         <div id='image-box'>
           <img id="preview" />
         </div>
@@ -63,13 +63,11 @@ setup() {
       }
     }).then((response) => {
       console.log(response)
-      console.log(this.file)
-      if(response) {
-        router.push('/')
-      }
-    }).catch((error) => {
-      console.log(error);
-      alert('ooops... Something went wrong, try again' + error)
+      router.push('/')
+
+    }).catch((err) => {
+      console.log(err);
+      alert(err)
     })
   }
 
@@ -92,8 +90,6 @@ input[type=post-title] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
-  // padding: 15px 32px;
-  // text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 26px;
