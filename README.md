@@ -13,6 +13,7 @@ BACKEND:
 - sequelize
 - bcrypt
 - body-parser
+- multer
 - cors
 - mysql2
 
