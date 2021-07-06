@@ -7,14 +7,14 @@ Each post can be commented by users, allowing them to discusse or share opinions
 All the data is stored in database, in this project I used mySQL.
 
 Aplication stack:
-*BACKEND:
+BACKEND:
 - express
 - sequelize
 - bcrypt
 - body-parser
 - cors
 - mysql2
-*FRONTEND:
+FRONTEND:
 - vue
 - axios
 - bootstrap
