@@ -1,6 +1,6 @@
 # oc-project-7
 
-This is a App that allows to create user profiles securely and let each user add posts in the application. Post can be send with pictures or gif's, as well as some descriptions.
+This is a Fullstack Vue App that allows to create user profiles securely and let each user add posts in the application. Post can be send with pictures or gif's, as well as some descriptions.
 
 Each post can be commented by users, allowing them to discusse or share opinions on specific topic. Whenever new post is added, corresponding badge next to the post will be displayed in the UI informing about it. This way users can easly notice which post is new and unseen by them.
 
